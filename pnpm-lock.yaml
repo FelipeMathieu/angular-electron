@@ -47,6 +47,12 @@ importers:
       '@fortawesome/free-solid-svg-icons':
         specifier: ^6.7.2
         version: 6.7.2
+      '@ngneat/elf':
+        specifier: ^2.5.1
+        version: 2.5.1(rxjs@7.8.2)
+      '@ngneat/elf-entities':
+        specifier: ^5.0.2
+        version: 5.0.2(@ngneat/elf@2.5.1(rxjs@7.8.2))(rxjs@7.8.2)
       ng-zorro-antd:
         specifier: 19.3.1
         version: 19.3.1(61f8840556d0a847b4e74acdd079eda3)
@@ -1475,6 +1481,17 @@ packages:
   '@napi-rs/nice@1.0.4':
     resolution: {integrity: sha512-Sqih1YARrmMoHlXGgI9JrrgkzxcaaEso0AH+Y7j8NHonUs+xe4iDsgC3IBIDNdzEewbNpccNN6hip+b5vmyRLw==}
     engines: {node: '>= 10'}
+
+  '@ngneat/elf-entities@5.0.2':
+    resolution: {integrity: sha512-G4ag51lvM3tOSgpxVVFYAgsh/bOL5BkNb4Z0VtosaM/CTWTHoNrf8UdvcaeJ3+sP1RS3bmEdZ9xUE8ifnVxssA==}
+    peerDependencies:
+      '@ngneat/elf': '>=2.5.0'
+      rxjs: '>=7.0.0'
+
+  '@ngneat/elf@2.5.1':
+    resolution: {integrity: sha512-13BItNZFgHglTiXuP9XhisNczwQ5QSzH+imAv9nAPsdbCq/3ortqkIYRnlxB8DGPVcuIjLujQ4OcZa+9QWgZtw==}
+    peerDependencies:
+      rxjs: '>=7.0.0'
 
   '@ngneat/spectator@21.0.0':
     resolution: {integrity: sha512-4lelGnUD3i8IdzqSzswurVqtlw1nyAz7VuAY22OwtBdZTnnlAAhLZbgVh4+VerakWaNuMHUpuyQRx0z95w8LYg==}
@@ -6937,6 +6954,15 @@ snapshots:
       '@napi-rs/nice-win32-ia32-msvc': 1.0.4
       '@napi-rs/nice-win32-x64-msvc': 1.0.4
     optional: true
+
+  '@ngneat/elf-entities@5.0.2(@ngneat/elf@2.5.1(rxjs@7.8.2))(rxjs@7.8.2)':
+    dependencies:
+      '@ngneat/elf': 2.5.1(rxjs@7.8.2)
+      rxjs: 7.8.2
+
+  '@ngneat/elf@2.5.1(rxjs@7.8.2)':
+    dependencies:
+      rxjs: 7.8.2
 
   '@ngneat/spectator@21.0.0(@angular/animations@19.2.14(@angular/common@19.2.14(@angular/core@19.2.14(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@19.2.14(rxjs@7.8.2)(zone.js@0.15.1)))(@angular/common@19.2.14(@angular/core@19.2.14(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/router@19.2.14(@angular/common@19.2.14(@angular/core@19.2.14(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@19.2.14(rxjs@7.8.2)(zone.js@0.15.1))(@angular/platform-browser@19.2.14(@angular/animations@19.2.14(@angular/common@19.2.14(@angular/core@19.2.14(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@19.2.14(rxjs@7.8.2)(zone.js@0.15.1)))(@angular/common@19.2.14(@angular/core@19.2.14(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@19.2.14(rxjs@7.8.2)(zone.js@0.15.1)))(rxjs@7.8.2))':
     dependencies:

@@ -30,7 +30,8 @@ function createWindow() {
     });
 
   mainWindow.loadURL(indexPath);
-  mainWindow.webContents.openDevTools();
+
+  if (process.env['ENV'] === 'DEV') mainWindow.webContents.openDevTools();
 }
 
 app.whenReady().then(createWindow);

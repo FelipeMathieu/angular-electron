@@ -11,7 +11,7 @@
     "electron:build": "npx tsc -p tsconfig.electron.json",
     "electron:local": "pnpm build:dev && pnpm electron:build && electron dist-electron/main.js",
     "electron:dev": "ts-node electron/main.ts",
-    "start:dev": "cross-env ELECTRON_START_URL=http://localhost:4200 concurrently -k \"ng serve\" \"wait-on http://localhost:4200 && pnpm electron:build && electron dist-electron/main.js\""
+    "start:dev": "cross-env ELECTRON_START_URL=http://localhost:4200 ENV=DEV concurrently -k \"ng serve\" \"wait-on http://localhost:4200 && pnpm electron:build && electron dist-electron/main.js\""
   },
   "private": true,
   "dependencies": {
@@ -28,6 +28,8 @@
     "@fortawesome/free-brands-svg-icons": "^6.7.1",
     "@fortawesome/free-regular-svg-icons": "^6.7.1",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@ngneat/elf": "^2.5.1",
+    "@ngneat/elf-entities": "^5.0.2",
     "ng-zorro-antd": "19.3.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
