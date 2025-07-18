@@ -2,6 +2,7 @@
   <div nz-flex nzVertical nzAlign="flex-start" nzJustify="center" [nzGap]="50">
     <nz-input-group nzSearch [nzAddOnAfter]="searchButton" nzSize="large">
       <input
+        id="search-input"
         nz-input
         [(ngModel)]="SearchText"
         placeholder="Search for movies, tv shows, animes, video games and etc..."
@@ -15,6 +16,7 @@
 
   <ng-template #searchButton>
     <button
+      id="search-button"
       nz-button
       nzType="primary"
       nzSize="large"
