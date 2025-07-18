@@ -5,4 +5,5 @@ export interface IItem {
   imageUrl: string;
   year: number;
   actors: string;
+  rank: number;
 }

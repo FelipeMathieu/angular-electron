@@ -5,13 +5,42 @@
 </ng-container>
 
 <ng-template #itemsList>
-  <ng-container *ngrxLet="ItemsList$ | async as items">
-    @if(!!items && items.length > 0) {
-    <div nz-flex nzAlign="center" nzWrap="wrap" nzJustify="space-evenly">
-      <span>{{ items.length }}</span>
-    </div>
-    } @else {
-    <nz-empty />
-    }
-  </ng-container>
+  <div
+    nz-flex
+    nzAlign="center"
+    nzJustify="flex-start"
+    nzWrap="wrap"
+    [nzGap]="20"
+  >
+    @for(item of (ItemsList$ | async); track item.id) {
+    <nz-card nzHoverable [nzCover]="cover" style="width: 240px">
+      <nz-card-meta [nzDescription]="description" />
+    </nz-card>
+    <ng-template #cover>
+      <img [alt]="item.name" [src]="item.imageUrl" />
+    </ng-template>
+    <ng-template #description>
+      <nz-row [nzGutter]="[16, 16]">
+        <nz-col [nzSpan]="24">
+          <nz-descriptions [nzTitle]="item.name" nzBordered [nzColumn]="1">
+            <nz-descriptions-item nzTitle="Rank">
+              {{ item.rank }}
+            </nz-descriptions-item>
+          </nz-descriptions>
+        </nz-col>
+        <nz-col [nzSpan]="24">
+          <button
+            nz-button
+            nzSize="large"
+            nzType="primary"
+            style="width: 100%"
+            (click)="OnClick(item.id)"
+          >
+            Details
+          </button>
+        </nz-col>
+      </nz-row>
+    </ng-template>
+    } @empty { <nz-empty style="width: 100%" /> }
+  </div>
 </ng-template>

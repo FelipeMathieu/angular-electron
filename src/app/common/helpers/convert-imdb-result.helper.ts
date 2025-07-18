@@ -28,6 +28,7 @@ export const convertImdbResult = (results: IImdbResult): IItem[] => {
         name: item['#TITLE'],
         actors: item['#ACTORS'],
         year: item['#YEAR'],
+        rank: item['#RANK'],
       } satisfies IItem)
   );
 };
