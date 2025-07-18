@@ -1,5 +1,5 @@
-import { IItem } from '../../models/item';
-import { IImdbResult } from '../../../common/helpers/convert-imdb-result.helper';
+import { IItem } from '../../core/models/item';
+import { IImdbResult } from '../helpers/convert-imdb-result.helper';
 
 export const MockImdbResult: IImdbResult = {
   description: [
@@ -22,7 +22,7 @@ export const MockImdbResult: IImdbResult = {
 export const MockItems: IItem[] = [
   {
     actors: 'Han',
-    category: 'Movie',
+    category: 'Movie/TV series',
     id: '12',
     imageUrl: 'string',
     imgHeight: 200,

@@ -2,8 +2,7 @@ import { setEntities } from '@ngneat/elf-entities';
 import ItemsStore from '../store/items.store';
 import { ItemsCommandsAndQueriesService } from './items-commands-and-queries.service';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
-import { MockItems } from './__mocks__';
-import { fakeAsync, tick } from '@angular/core/testing';
+import { MockItems } from '../../common/__mocks__';
 import { take } from 'rxjs';
 import { IItem } from '../models/item';
 

@@ -1,6 +1,6 @@
 import { environment } from '../../../environments/environment';
 import { ConverterHelper } from '../../common/helpers/convert-imdb-result.helper';
-import { MockImdbResult, MockItems } from './__mocks__';
+import { MockImdbResult, MockItems } from '../../common/__mocks__';
 import { ItemsCommandsAndQueriesService } from './items-commands-and-queries.service';
 import { SearchItemsService } from './search-items.service';
 import {
