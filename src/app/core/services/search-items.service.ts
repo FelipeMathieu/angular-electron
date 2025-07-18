@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { take, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import {
-  convertImdbResult,
+  ConverterHelper,
   type IImdbResult,
 } from '../../common/helpers/convert-imdb-result.helper';
 import { ItemsCommandsAndQueriesService } from './items-commands-and-queries.service';
@@ -28,7 +28,7 @@ export class SearchItemsService {
       .pipe(
         take(1),
         tap((response) => {
-          const items = convertImdbResult(response);
+          const items = ConverterHelper.ConvertImdbResult(response);
 
           SetItems(items);
         }),

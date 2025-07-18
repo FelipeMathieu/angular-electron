@@ -1,29 +1,21 @@
-import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { createComponentFactory, Spectator } from '@ngneat/spectator';
 
 describe('AppComponent', () => {
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [AppComponent],
-    }).compileComponents();
+  let spectator: Spectator<AppComponent>;
+  const createComponent = createComponentFactory({
+    component: AppComponent,
+    shallow: true,
+    detectChanges: false,
   });
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+  beforeEach(() => {
+    spectator = createComponent();
   });
 
-  it(`should have the 'angular-electron' title`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('angular-electron');
-  });
+  it('should render component', () => {
+    const element = spectator.query('main');
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, angular-electron');
+    expect(element).toBeTruthy();
   });
 });

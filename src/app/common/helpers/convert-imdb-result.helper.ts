@@ -16,21 +16,23 @@ export interface IImdbResult {
   }>;
 }
 
-export const convertImdbResult = (results: IImdbResult): IItem[] => {
-  const { description: items } = results;
+export class ConverterHelper {
+  public static ConvertImdbResult(results: IImdbResult): IItem[] {
+    const { description: items } = results;
 
-  return items.map(
-    (item) =>
-      ({
-        category: 'Movie/TV series',
-        id: item['#IMDB_ID'],
-        imageUrl: item['#IMG_POSTER'],
-        name: item['#TITLE'],
-        actors: item['#ACTORS'],
-        year: item['#YEAR'],
-        rank: item['#RANK'],
-        imgHeight: item.photo_height,
-        imgWidth: item.photo_width,
-      } satisfies IItem)
-  );
-};
+    return items.map(
+      (item) =>
+        ({
+          category: 'Movie/TV series',
+          id: item['#IMDB_ID'],
+          imageUrl: item['#IMG_POSTER'],
+          name: item['#TITLE'],
+          actors: item['#ACTORS'],
+          year: item['#YEAR'],
+          rank: item['#RANK'],
+          imgHeight: item.photo_height,
+          imgWidth: item.photo_width,
+        } satisfies IItem)
+    );
+  }
+}
