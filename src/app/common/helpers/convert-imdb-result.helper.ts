@@ -22,13 +22,15 @@ export const convertImdbResult = (results: IImdbResult): IItem[] => {
   return items.map(
     (item) =>
       ({
-        category: 'movie',
+        category: 'Movie/TV series',
         id: item['#IMDB_ID'],
         imageUrl: item['#IMG_POSTER'],
         name: item['#TITLE'],
         actors: item['#ACTORS'],
         year: item['#YEAR'],
         rank: item['#RANK'],
+        imgHeight: item.photo_height,
+        imgWidth: item.photo_width,
       } satisfies IItem)
   );
 };

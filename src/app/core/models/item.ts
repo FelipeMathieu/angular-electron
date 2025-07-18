@@ -6,4 +6,6 @@ export interface IItem {
   year: number;
   actors: string;
   rank: number;
+  imgHeight: number;
+  imgWidth: number;
 }

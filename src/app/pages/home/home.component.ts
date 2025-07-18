@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NzFlexModule } from 'ng-zorro-antd/flex';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -27,7 +27,7 @@ import { AsyncPipe } from '@angular/common';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   protected faMagnifyingGlass = faMagnifyingGlass;
   protected SearchText = '';
   protected IsLoading$!: Observable<boolean>;
@@ -41,6 +41,10 @@ export class HomeComponent {
     this.IsLoading$ = Items$.pipe(
       map((response) => response.fetchStatus === 'fetching')
     );
+  }
+
+  ngOnInit(): void {
+    this._service.Commands.ResetStore();
   }
 
   public OnSearch(): void {

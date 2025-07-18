@@ -4,19 +4,47 @@ import { NzFlexModule } from 'ng-zorro-antd/flex';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
+import { IItem } from '../../core/models/item';
+import { ItemsCommandsAndQueriesService } from '../../core/services/items-commands-and-queries.service';
+import { AsyncPipe, CommonModule } from '@angular/common';
+import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
+import { NzImageModule } from 'ng-zorro-antd/image';
+import { NzAlertModule } from 'ng-zorro-antd/alert';
 
 @Component({
   selector: 'app-selected-item',
-  imports: [NzFlexModule, NzGridModule, NzButtonModule, FaIconComponent],
+  imports: [
+    NzFlexModule,
+    NzGridModule,
+    NzButtonModule,
+    FaIconComponent,
+    AsyncPipe,
+    CommonModule,
+    NzDescriptionsModule,
+    NzImageModule,
+    NzAlertModule,
+  ],
   templateUrl: './selected-item.component.html',
   styleUrl: './selected-item.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectedItemComponent {
   protected faArrowLeft = faArrowLeft;
+  protected SelectedItem$!: Observable<IItem | undefined>;
 
-  constructor(private readonly _router: Router) {}
+  constructor(
+    private readonly _router: Router,
+    private readonly _service: ItemsCommandsAndQueriesService,
+    private readonly _activatedRoute: ActivatedRoute
+  ) {
+    const { GetSelectedItem$ } = this._service.Queries;
+
+    const id = this._activatedRoute.snapshot.paramMap.get('id');
+
+    this.SelectedItem$ = id ? GetSelectedItem$(id) : of(undefined);
+  }
 
   protected OnBackHome(): void {
     this._router.navigate(['']);

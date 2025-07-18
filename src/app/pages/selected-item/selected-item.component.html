@@ -1,4 +1,4 @@
-<nz-row>
+<nz-row [nzGutter]="[16, 16]">
   <nz-col [nzSpan]="24">
     <button nz-button nzSize="large" nzType="text" (click)="OnBackHome()">
       <div nz-flex nzAlign="center" [nzGap]="10">
@@ -8,6 +8,39 @@
     </button>
   </nz-col>
   <nz-col [nzSpan]="24">
-    <div nz-flex></div>
+    <ng-container *ngIf="SelectedItem$ | async as item; else error">
+      <div nz-flex nzAlign="flex-start" [nzGap]="20" nzWrap="wrap">
+        <img
+          nz-image
+          [nzSrc]="item.imageUrl"
+          [alt]="item.name"
+          [height]="500"
+          [width]="350"
+        />
+        <nz-descriptions nzBordered [nzTitle]="item.name" [nzColumn]="1">
+          <nz-descriptions-item nzTitle="Release year">
+            {{ item.year }}
+          </nz-descriptions-item>
+          <nz-descriptions-item nzTitle="Rank">
+            {{ item.rank }}
+          </nz-descriptions-item>
+          <nz-descriptions-item nzTitle="Category">
+            {{ item.category }}
+          </nz-descriptions-item>
+          <nz-descriptions-item nzTitle="Actors">
+            {{ item.actors }}
+          </nz-descriptions-item>
+        </nz-descriptions>
+      </div>
+    </ng-container>
+
+    <ng-template #error>
+      <nz-alert
+        nzType="error"
+        nzMessage="Error"
+        nzDescription="Something went wrong, please go back to the home page and try again."
+        style="width: 100%"
+      />
+    </ng-template>
   </nz-col>
 </nz-row>
