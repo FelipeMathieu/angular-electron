@@ -1,16 +1,27 @@
-<div nz-flex nzVertical nzAlign="flex-start" nzJustify="center" [nzGap]="20">
-  <nz-input-group nzSearch [nzAddOnAfter]="searchButton" nzSize="large">
-    <input
-      nz-input
-      [(ngModel)]="SearchText"
-      placeholder="Search for movies, tv shows, animes, video games and etc..."
-      (keyup.enter)="OnSearch()"
-    />
-  </nz-input-group>
-</div>
+<ng-container *ngrxLet="IsLoading$ | async as loading">
+  <div nz-flex nzVertical nzAlign="flex-start" nzJustify="center" [nzGap]="50">
+    <nz-input-group nzSearch [nzAddOnAfter]="searchButton" nzSize="large">
+      <input
+        nz-input
+        [(ngModel)]="SearchText"
+        placeholder="Search for movies, tv shows, animes, video games and etc..."
+        (keyup.enter)="OnSearch()"
+        [disabled]="!!loading"
+      />
+    </nz-input-group>
 
-<ng-template #searchButton>
-  <button nz-button nzType="primary" nzSize="large" (click)="OnSearch()">
-    <fa-icon [icon]="faMagnifyingGlass" />
-  </button>
-</ng-template>
+    <app-list-items />
+  </div>
+
+  <ng-template #searchButton>
+    <button
+      nz-button
+      nzType="primary"
+      nzSize="large"
+      (click)="OnSearch()"
+      [disabled]="loading"
+    >
+      <fa-icon [icon]="faMagnifyingGlass" />
+    </button>
+  </ng-template>
+</ng-container>

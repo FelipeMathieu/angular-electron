@@ -1,1 +1,17 @@
-<p>list-items works!</p>
+<ng-container *ngIf="IsLoading$ | async; else itemsList">
+  <div nz-flex nzJustify="center" nzAlign="center">
+    <nz-spin nzSimple nzSize="large" />
+  </div>
+</ng-container>
+
+<ng-template #itemsList>
+  <ng-container *ngrxLet="ItemsList$ | async as items">
+    @if(!!items && items.length > 0) {
+    <div nz-flex nzAlign="center" nzWrap="wrap" nzJustify="space-evenly">
+      <span>{{ items.length }}</span>
+    </div>
+    } @else {
+    <nz-empty />
+    }
+  </ng-container>
+</ng-template>

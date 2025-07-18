@@ -30,6 +30,8 @@
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@ngneat/elf": "^2.5.1",
     "@ngneat/elf-entities": "^5.0.2",
+    "@ngneat/elf-requests": "1.9.2",
+    "@ngrx/component": "^19.2.1",
     "ng-zorro-antd": "19.3.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
