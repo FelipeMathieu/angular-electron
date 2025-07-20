@@ -5,7 +5,7 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable, of, shareReplay } from 'rxjs';
 import { IItem } from '../../core/models/item';
 import { ItemsCommandsAndQueriesService } from '../../core/services/items-commands-and-queries.service';
 import { AsyncPipe, CommonModule } from '@angular/common';
@@ -43,7 +43,9 @@ export class SelectedItemComponent {
 
     const id = this._activatedRoute.snapshot.paramMap.get('id');
 
-    this.SelectedItem$ = id ? GetSelectedItem$(id) : of(undefined);
+    this.SelectedItem$ = id
+      ? GetSelectedItem$(id).pipe(shareReplay(1))
+      : of(undefined);
   }
 
   protected OnBackHome(): void {

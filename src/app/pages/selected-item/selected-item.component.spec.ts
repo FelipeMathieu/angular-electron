@@ -1,22 +1,82 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import {
+  createRoutingFactory,
+  mockProvider,
+  Spectator,
+  SpectatorRoutingOptions,
+} from '@ngneat/spectator';
 import { SelectedItemComponent } from './selected-item.component';
+import { MockItems } from '../../common/__mocks__';
+import { ItemsCommandsAndQueriesService } from '../../core/services/items-commands-and-queries.service';
+import { Router } from '@angular/router';
+import { of } from 'rxjs';
+import { fakeAsync } from '@angular/core/testing';
+import { omit } from 'lodash';
 
-xdescribe('SelectedItemComponent', () => {
-  let component: SelectedItemComponent;
-  let fixture: ComponentFixture<SelectedItemComponent>;
+const ID = MockItems[0].id;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [SelectedItemComponent],
-    }).compileComponents();
+const mockGetSelectedItems$ = jasmine.createSpy();
 
-    fixture = TestBed.createComponent(SelectedItemComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+const INITIAL_STATE: SpectatorRoutingOptions<SelectedItemComponent> = {
+  component: SelectedItemComponent,
+  params: { id: ID },
+  providers: [
+    mockProvider(ItemsCommandsAndQueriesService, {
+      get Queries() {
+        return {
+          GetSelectedItem$: mockGetSelectedItems$,
+        };
+      },
+    }),
+  ],
+  shallow: true,
+  detectChanges: false,
+};
+
+describe('SelectedItemComponent', () => {
+  describe('When there is a selected item', () => {
+    let spectator: Spectator<SelectedItemComponent>;
+    const createComponent = createRoutingFactory(INITIAL_STATE);
+
+    beforeEach(() => {
+      mockGetSelectedItems$.and.returnValue(of(MockItems[0]));
+
+      spectator = createComponent();
+      spectator.detectChanges();
+    });
+
+    it('should render selected item component', () => {
+      const descriptionElement = spectator.query('nz-descriptions');
+
+      expect(spectator.fixture.componentInstance).toBeTruthy();
+      expect(descriptionElement).toBeTruthy();
+      expect(mockGetSelectedItems$).toHaveBeenCalledWith(ID);
+    });
+
+    it('should navigate to home page', () => {
+      const router = spectator.inject(Router);
+      const element = spectator.query('button') as HTMLButtonElement;
+
+      spectator.click(element);
+
+      expect(router.navigate).toHaveBeenCalledOnceWith(['']);
+    });
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  describe('When there is no selected item in the store', () => {
+    let spectator: Spectator<SelectedItemComponent>;
+    const createComponent = createRoutingFactory({
+      ...omit(INITIAL_STATE, 'params'),
+    });
+
+    beforeEach(() => {
+      spectator = createComponent();
+      spectator.detectChanges();
+    });
+
+    it('should render the alert', () => {
+      const element = spectator.query('nz-alert');
+
+      expect(element).toBeTruthy();
+    });
   });
 });
