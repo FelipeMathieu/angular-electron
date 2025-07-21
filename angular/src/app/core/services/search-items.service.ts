@@ -9,7 +9,7 @@ import {
 import { ItemsCommandsAndQueriesService } from './items-commands-and-queries.service';
 import { trackRequestResult } from '@ngneat/elf-requests';
 
-const path = 'search';
+const path = 'api/items';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +24,9 @@ export class SearchItemsService {
     const { SetItems } = this._service.Commands;
 
     this._httpClient
-      .get<IImdbResult>(`${environment.apiUrl}/${path}?q=${searchText}`)
+      .get<IImdbResult>(
+        `${environment.apiUrl}/${path}?searchText=${searchText}`
+      )
       .pipe(
         take(1),
         tap((response) => {

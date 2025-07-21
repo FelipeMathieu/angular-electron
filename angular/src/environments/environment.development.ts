@@ -1,6 +1,6 @@
 import { IEnvironment } from './environment.interface';
 
 export const environment: IEnvironment = {
-  apiUrl: 'https://imdb.iamidiotareyoutoo.com',
+  apiUrl: 'http://localhost:3001',
   production: false,
 };
