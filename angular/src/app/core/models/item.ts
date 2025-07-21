@@ -8,4 +8,5 @@ export interface IItem {
   rank: number;
   imgHeight: number;
   imgWidth: number;
+  detailsUrl: string;
 }

@@ -30,5 +30,6 @@ export const MockItems: IItem[] = [
     name: 'Rocky',
     rank: 123,
     year: 2222,
+    detailsUrl: 'string',
   },
 ];

@@ -32,6 +32,7 @@ export class ConverterHelper {
           rank: item['#RANK'],
           imgHeight: item.photo_height,
           imgWidth: item.photo_width,
+          detailsUrl: item['#IMDB_URL'],
         } satisfies IItem)
     );
   }

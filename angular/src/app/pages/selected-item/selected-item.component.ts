@@ -3,7 +3,10 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzFlexModule } from 'ng-zorro-antd/flex';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import {
+  faArrowLeft,
+  faArrowUpRightFromSquare,
+} from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of, shareReplay } from 'rxjs';
 import { IItem } from '../../core/models/item';
@@ -32,6 +35,7 @@ import { NzAlertModule } from 'ng-zorro-antd/alert';
 })
 export class SelectedItemComponent {
   protected faArrowLeft = faArrowLeft;
+  protected faArrowUpRightFromSquare = faArrowUpRightFromSquare;
   protected SelectedItem$!: Observable<IItem | undefined>;
 
   constructor(
@@ -50,5 +54,9 @@ export class SelectedItemComponent {
 
   protected OnBackHome(): void {
     this._router.navigate(['']);
+  }
+
+  protected OpenDetails(url: string): void {
+    window.electronAPI.openExternal(url);
   }
 }

@@ -1,4 +1,4 @@
-import electron from 'electron';
+import electron, { ipcMain, shell } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 import reloader from 'electron-reloader';
@@ -16,6 +16,7 @@ function createWindow() {
     width: 1024,
     height: 768,
     webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: false,
       contextIsolation: true,
     },
@@ -30,6 +31,10 @@ function createWindow() {
     });
 
   mainWindow.loadURL(indexPath);
+
+  ipcMain.handle('open-external', async (_, url) => {
+    await shell.openExternal(url);
+  });
 
   if (process.env['ENV'] === 'DEV') mainWindow.webContents.openDevTools();
 }

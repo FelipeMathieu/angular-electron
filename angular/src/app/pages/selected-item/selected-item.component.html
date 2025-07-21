@@ -1,6 +1,12 @@
 <nz-row [nzGutter]="[16, 16]">
   <nz-col [nzSpan]="24">
-    <button nz-button nzSize="large" nzType="text" (click)="OnBackHome()">
+    <button
+      id="go-to-home"
+      nz-button
+      nzSize="large"
+      nzType="text"
+      (click)="OnBackHome()"
+    >
       <div nz-flex nzAlign="center" [nzGap]="10">
         <fa-icon [icon]="faArrowLeft" />
         Back to Home
@@ -9,7 +15,13 @@
   </nz-col>
   <nz-col [nzSpan]="24">
     <ng-container *ngIf="SelectedItem$ | async as item; else error">
-      <div nz-flex nzAlign="flex-start" [nzGap]="20" nzWrap="wrap">
+      <div
+        nz-flex
+        nzAlign="center"
+        nzJustify="center"
+        [nzGap]="20"
+        nzWrap="wrap"
+      >
         <img
           nz-image
           [nzSrc]="item.imageUrl"
@@ -17,20 +29,35 @@
           [height]="500"
           [width]="350"
         />
-        <nz-descriptions nzBordered [nzTitle]="item.name" [nzColumn]="1">
-          <nz-descriptions-item nzTitle="Release year">
-            {{ item.year }}
-          </nz-descriptions-item>
-          <nz-descriptions-item nzTitle="Rank">
-            {{ item.rank }}
-          </nz-descriptions-item>
-          <nz-descriptions-item nzTitle="Category">
-            {{ item.category }}
-          </nz-descriptions-item>
-          <nz-descriptions-item nzTitle="Actors">
-            {{ item.actors }}
-          </nz-descriptions-item>
-        </nz-descriptions>
+        <div nz-flex nzVertical [nzGap]="10" style="width: 100%">
+          <nz-descriptions nzBordered [nzTitle]="item.name" [nzColumn]="1">
+            <nz-descriptions-item nzTitle="Release year">
+              {{ item.year }}
+            </nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Rank">
+              {{ item.rank }}
+            </nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Category">
+              {{ item.category }}
+            </nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Actors">
+              {{ item.actors }}
+            </nz-descriptions-item>
+          </nz-descriptions>
+
+          <button
+            id="open-details"
+            nz-button
+            nzType="link"
+            nzSize="large"
+            (click)="OpenDetails(item.detailsUrl)"
+          >
+            <div nz-flex nzAlign="center" nzJustify="center" [nzGap]="8">
+              Open details
+              <fa-icon [icon]="faArrowUpRightFromSquare" />
+            </div>
+          </button>
+        </div>
       </div>
     </ng-container>
 

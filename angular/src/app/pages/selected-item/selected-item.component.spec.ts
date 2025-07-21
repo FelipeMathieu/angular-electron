@@ -40,6 +40,10 @@ describe('SelectedItemComponent', () => {
     beforeEach(() => {
       mockGetSelectedItems$.and.returnValue(of(MockItems[0]));
 
+      (window as any).electronAPI = {
+        openExternal: jasmine.createSpy('openExternal'),
+      };
+
       spectator = createComponent();
       spectator.detectChanges();
     });
@@ -54,11 +58,21 @@ describe('SelectedItemComponent', () => {
 
     it('should navigate to home page', () => {
       const router = spectator.inject(Router);
-      const element = spectator.query('button') as HTMLButtonElement;
+      const element = spectator.query('#go-to-home') as HTMLButtonElement;
 
       spectator.click(element);
 
       expect(router.navigate).toHaveBeenCalledOnceWith(['']);
+    });
+
+    it('should call IPC function to open the detail page of the item in an external browser', () => {
+      const element = spectator.query('#open-details') as HTMLButtonElement;
+
+      spectator.click(element);
+
+      expect(window.electronAPI.openExternal).toHaveBeenCalledOnceWith(
+        MockItems[0].detailsUrl
+      );
     });
   });
 

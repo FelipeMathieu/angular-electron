@@ -45,7 +45,10 @@ describe('SearchItemsService', () => {
     spectator.service.GetItems(searchTerm);
 
     spectator
-      .expectOne(`${environment.apiUrl}/search?q=${searchTerm}`, HttpMethod.GET)
+      .expectOne(
+        `${environment.apiUrl}/api/items?searchText=${searchTerm}`,
+        HttpMethod.GET
+      )
       .flush(MockImdbResult);
 
     expect(spy).toHaveBeenCalledTimes(1);
